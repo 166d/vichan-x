@@ -1,11 +1,11 @@
-<div><b>{% trans 'Inbox' %}</b> | <a href="?/outbox">Outbox</a></div>
+<div><a href="?/inbox">{% trans 'Inbox' %}</a> | <b>Outbox</b></div>
 {% if messages|length == 0 %}
 	<p style="text-align:center" class="unimportant">({% trans 'No private messages for you.' %})</p>
 {% else %}
 	<table class="modlog">
 		<tr>
 			<th>{% trans 'ID' %}</th>
-			<th>{% trans 'From' %}</th>
+			<th>{% trans 'To' %}</th>
 			<th>{% trans 'Date' %}</th>
 			<th>{% trans 'Message snippet' %}</th>
 		</tr>

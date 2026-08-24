@@ -1369,6 +1369,7 @@
 	$config['file_mod_pm'] = 'mod/pm.html';
 	$config['file_mod_new_pm'] = 'mod/new_pm.html';
 	$config['file_mod_inbox'] = 'mod/inbox.html';
+	$config['file_mod_outbox'] = 'mod/outbox.html';
 
 	$config['file_mod_rebuilt'] = 'mod/rebuilt.html';
 	$config['file_mod_rebuild'] = 'mod/rebuild.html';

@@ -1021,6 +1021,8 @@ if ($step == 0) {
 
 	$sql = @file_get_contents('install.sql') or error("Couldn't load install.sql.");
 
+	// Windows compatibility
+	$sql = str_replace(["\r\n", "\r"], "\n", $sql);
 	sql_open();
 	$mysql_version = mysql_version();
 

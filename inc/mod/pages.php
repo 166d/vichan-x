@@ -2228,10 +2228,12 @@ function mod_pm(Context $ctx, $id, $reply = false) {
 	$query->bindValue(':id', $id);
 	$query->execute() or error(db_error($query));
 
-	if ((!$pm = $query->fetch(PDO::FETCH_ASSOC)) || ($pm['to'] != $mod['id'] && !hasPermission($config['mod']['master_pm'])))
+	if ((!$pm = $query->fetch(PDO::FETCH_ASSOC)) || ($pm['to'] != $mod['id'] && $pm['sender'] != $mod['id'] && !hasPermission($config['mod']['master_pm'])))
 		error($config['error']['404']);
 
 	if (isset($_POST['delete'])) {
+		if ($pm['to'] != $mod['id'] && !hasPermission($config['mod']['master_pm']))
+			error($config['error']['noaccess']);
 		$query = prepare("DELETE FROM ``pms`` WHERE `id` = :id");
 		$query->bindValue(':id', $id);
 		$query->execute() or error(db_error($query));
@@ -2303,6 +2305,35 @@ function mod_inbox(Context $ctx) {
 		],
 		$mod
 	);
+}
+
+
+function mod_outbox(Context $ctx) {
+    global $mod;
+    $config = $ctx->get('config');
+
+    $query = prepare('SELECT `pms`.`id`, `time`, `sender`, `to`, `message`, `username`
+        FROM `pms`
+        LEFT JOIN `mods` ON `mods`.`id` = `to`
+        WHERE `sender` = :mod
+        ORDER BY `time` DESC');
+
+    $query->bindValue(':mod', $mod['id']);
+    $query->execute() or error(db_error($query));
+    $messages = $query->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($messages as &$message) {
+        $message['snippet'] = pm_snippet($message['message']);
+    }
+
+    mod_page(
+        _('PM outbox'),
+        $config['file_mod_outbox'],
+        [
+            'messages' => $messages
+        ],
+        $mod
+    );
 }
 
 
