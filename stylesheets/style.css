@@ -573,32 +573,6 @@ table.mod.config-editor input[type="text"] {
   background: inherit;
 }
 
-#attention_bar {
-  height: 1.5em;
-  max-height: 1.5em;
-  width: 100%;
-  max-width: 100%;
-  text-align: center;
-  overflow: hidden;
-}
-
-#attention_bar_form {
-  display: none;
-  padding: 0;
-  margin: 0;
-}
-
-#attention_bar_input {
-  width: 100%;
-  padding: 0;
-  margin: 0;
-  text-align: center;
-}
-
-#attention_bar:hover {
-  background-color: rgba(100%,100%,100%,0.2);
-}
-
 .intro.thread-hidden {
   margin: 0;
   padding: 0;
