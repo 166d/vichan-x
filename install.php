@@ -731,10 +731,10 @@ if ($step == 0) {
 	$tests = array(
 		array(
 			'category' => 'PHP',
-			'name' => 'PHP &ge; 7.4',
-			'result' => PHP_VERSION_ID >= 50400,
+			'name' => 'PHP &ge; 8.2',
+			'result' => PHP_VERSION_ID >= 80200,
 			'required' => true,
-			'message' => 'vichan requires PHP 7.4 or better.',
+			'message' => 'vichan requires PHP 8.2 or better.',
 		),
 		array(
 			'category' => 'PHP',
